@@ -1,7 +1,5 @@
-# COURSENAME
-This is the repository for the LinkedIn Learning course `course-name`. The full course is available from [LinkedIn Learning][lil-course-url].
-
-![course-name-alt-text][lil-thumbnail-url] 
+# Complete Your First Project in R
+This is the repository for the LinkedIn Learning course `Complete Your First Project in R`. The full course is available from [LinkedIn Learning][lil-course-url].
 
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
