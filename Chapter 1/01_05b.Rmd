@@ -1,0 +1,64 @@
+Complete Your First Project in R
+Exploring Customer Data
+
+```{r}
+#run first
+library(xlsx)
+library(dplyr)
+data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+```
+
+```{r}
+#get customer type by total number of orders
+
+```
+
+
+```{r}
+#average sales and quantity by customer type
+
+
+
+
+```
+
+
+```{r}
+#total sales and quantity by customer type
+
+
+
+
+```
+
+```{r}
+#get top customer states by total number of orders
+
+```
+
+```{r}
+#get top customer states by total number of customers
+
+```
+
+```{r}
+#get top customer cities by total number of customers
+
+```
+
+```{r}
+#get top customer states by total number of customers
+
+```
+
+```{r}
+#review product categories sold by customer type
+
+```
+
+```{r}
+#review product categories sold by customer state
+
+```
+

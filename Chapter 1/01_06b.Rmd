@@ -1,0 +1,71 @@
+Complete Your First Project in R
+Exploring Customer Data
+
+```{r}
+#run first
+library(xlsx)
+library(dplyr)
+data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+```
+
+```{r}
+#sort data by order total
+
+```
+
+
+```{r}
+#sort data by order quantity
+
+```
+
+
+```{r}
+#get top employees by total number of orders
+
+```
+
+```{r}
+#get top employee job positions by total number of orders
+
+```
+
+```{r}
+#review employee job titles
+
+
+```
+
+```{r}
+#review employee sales regions
+
+
+```
+
+```{r}
+#average sales and quantity by employee job titles
+
+
+
+
+```
+
+```{r}
+#total sales and quantity by employee job titles
+
+
+
+
+```
+
+```{r}
+#review product categories sold by employee job title
+
+```
+
+```{r}
+#review product categories sold by employee job title
+
+```
+

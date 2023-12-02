@@ -1,0 +1,25 @@
+Complete Your First Project in R
+Exploring Customer Data
+
+```{r}
+#get working directory
+
+```
+
+```{r}
+#import xlsx library
+
+```
+
+
+```{r}
+#load Red30 Tech Sales data
+
+```
+
+
+```{r}
+#load Red30 Tech Customer data
+
+```
+

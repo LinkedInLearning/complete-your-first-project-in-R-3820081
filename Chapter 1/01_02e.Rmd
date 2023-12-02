@@ -1,0 +1,27 @@
+Complete Your First Project in R
+Exploring Customer Data
+
+```{r}
+#get working directory
+getwd()
+```
+
+```{r}
+#import xlsx library
+library(xlsx)
+```
+
+
+```{r}
+#load Red30 Tech Sales data
+data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+data1
+```
+
+
+```{r}
+#load Red30 Tech Customer data
+data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+data2
+```
+

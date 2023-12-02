@@ -1,0 +1,61 @@
+Complete Your First Project in R
+Exploring Customer Data
+
+```{r}
+#run first
+library(xlsx)
+data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+```
+
+```{r}
+#install data table package
+install.packages("data.table", dependencies=TRUE)
+library("data.table")
+```
+
+```{r}
+#get data1 summary
+summary(data1)
+```
+
+
+```{r}
+#get data2 summary
+summary(data2)
+```
+
+
+```{r}
+#narrow data1 summary
+summary(data1[ , c('Quantity', 'Price', 'Discount', 'Order.Total')])
+```
+
+```{r}
+#payment status value counts
+table(data1$Payment.Status)
+```
+
+```{r}
+#payment status proportions
+prop.table(table(data1$Payment.Status))
+```
+
+```{r}
+#get payment plan by total number of orders
+table(data1$Payment.Plan)
+prop.table(table(data1$Payment.Plan))
+```
+
+```{r}
+#check for null values in data1
+is.null(data1)
+sum(is.na(data1))
+```
+
+```{r}
+#check for null values in data2
+is.null(data2)
+sum(is.na(data2))
+```
+
