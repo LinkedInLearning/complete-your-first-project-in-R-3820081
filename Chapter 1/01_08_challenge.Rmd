@@ -5,8 +5,7 @@ Exploring Customer Data
 #run first
 library(xlsx)
 library(dplyr)
-data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}

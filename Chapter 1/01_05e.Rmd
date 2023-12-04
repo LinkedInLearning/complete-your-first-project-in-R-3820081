@@ -5,21 +5,21 @@ Exploring Customer Data
 #run first
 library(xlsx)
 library(dplyr)
-data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}
 #get customer type by total number of orders
-table(data1$CustomerType)
-prop.table(table(data1$CustomerType))
+table(sales$CustomerType)
+prop.table(table(sales$CustomerType))
 
 ```
 
 
 ```{r}
 #average sales and quantity by customer type
-data1 %>% group_by(CustomerType)  %>%
+sales %>% group_by(CustomerType)  %>%
                     summarise(mean_sales = mean(Order.Total), 
                               mean_quantity = mean(Quantity), 
                               .groups = 'drop')
@@ -28,7 +28,7 @@ data1 %>% group_by(CustomerType)  %>%
 
 ```{r}
 #total sales and quantity by customer type
-data1 %>% group_by(CustomerType)  %>%
+sales %>% group_by(CustomerType)  %>%
                     summarise(total_sales = sum(Order.Total), 
                               total_quantity = sum(Quantity), 
                               .groups = 'drop')
@@ -36,31 +36,31 @@ data1 %>% group_by(CustomerType)  %>%
 
 ```{r}
 #get top customer states by total number of orders
-data1 %>% count(CustState, sort = TRUE)
+sales %>% count(CustState, sort = TRUE)
 ```
 
 ```{r}
 #get top customer states by total number of customers
-data2 %>% count(CustState, sort = TRUE)
+customers %>% count(CustState, sort = TRUE)
 ```
 
 ```{r}
 #get top customer cities by total number of customers
-data2 %>% count(CustCity, sort = TRUE)
+customers %>% count(CustCity, sort = TRUE)
 ```
 
 ```{r}
 #get top customer states by total number of customers
-data2 %>% count(CustZip, sort = TRUE)
+customers %>% count(CustZip, sort = TRUE)
 ```
 
 ```{r}
 #review product categories sold by customer type
-table(data1$CustomerType, data1$ProdCategory)
+table(sales$CustomerType, sales$ProdCategory)
 ```
 
 ```{r}
 #review product categories sold by customer state
-table(data1$CustState, data1$ProdCategory)
+table(sales$CustState, sales$ProdCategory)
 ```
 

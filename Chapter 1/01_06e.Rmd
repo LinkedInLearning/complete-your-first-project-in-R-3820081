@@ -5,47 +5,47 @@ Exploring Customer Data
 #run first
 library(xlsx)
 library(dplyr)
-data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}
 #sort data by order total
-data1[order(data1$Order.Total, decreasing = TRUE), ]
+sales[order(sales$Order.Total, decreasing = TRUE), ]
 ```
 
 
 ```{r}
 #sort data by order quantity
-data1[order(data1$Quantity, decreasing = TRUE), ]
+sales[order(sales$Quantity, decreasing = TRUE), ]
 ```
 
 
 ```{r}
 #get top employees by total number of orders
-data1 %>% count(Employee.Name, sort = TRUE)
+sales %>% count(Employee.Name, sort = TRUE)
 ```
 
 ```{r}
 #get top employee job positions by total number of orders
-data1 %>% count(Employee.Job.Title, sort = TRUE)
+sales %>% count(Employee.Job.Title, sort = TRUE)
 ```
 
 ```{r}
 #review employee job titles
-table(data1$Employee.Job.Title)
-prop.table(table(data1$Employee.Job.Title))
+table(sales$Employee.Job.Title)
+prop.table(table(sales$Employee.Job.Title))
 ```
 
 ```{r}
 #review employee sales regions
-table(data1$Sales.Region)
-prop.table(table(data1$Sales.Region))
+table(sales$Sales.Region)
+prop.table(table(sales$Sales.Region))
 ```
 
 ```{r}
 #average sales and quantity by employee job titles
-data1 %>% group_by(Employee.Job.Title)  %>%
+sales %>% group_by(Employee.Job.Title)  %>%
                     summarise(mean_sales = mean(Order.Total), 
                               mean_quantity = mean(Quantity), 
                               .groups = 'drop')
@@ -53,7 +53,7 @@ data1 %>% group_by(Employee.Job.Title)  %>%
 
 ```{r}
 #total sales and quantity by employee job titles
-data1 %>% group_by(Employee.Job.Title)  %>%
+sales %>% group_by(Employee.Job.Title)  %>%
                     summarise(total_sales = sum(Order.Total), 
                               total_quantity = sum(Quantity), 
                               .groups = 'drop')
@@ -61,11 +61,11 @@ data1 %>% group_by(Employee.Job.Title)  %>%
 
 ```{r}
 #review product categories sold by employee job title
-table(data1$Employee.Job.Title, data1$ProdCategory)
+table(sales$Employee.Job.Title, sales$ProdCategory)
 ```
 
 ```{r}
 #review product categories sold by employee job title
-table(data1$Employee.Job.Title, data1$Sales.Region)
+table(sales$Employee.Job.Title, sales$Sales.Region)
 ```
 

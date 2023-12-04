@@ -4,8 +4,8 @@ Exploring Customer Data
 ```{r}
 #run first
 library(xlsx)
-data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}
@@ -15,19 +15,19 @@ data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Cou
 ```
 
 ```{r}
-#get data1 summary
+#get sales summary
 
 ```
 
 
 ```{r}
-#get data2 summary
+#get customers summary
 
 ```
 
 
 ```{r}
-#narrow data1 summary
+#narrow sales summary
 
 ```
 
@@ -42,12 +42,12 @@ data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Cou
 ```
 
 ```{r}
-#check for null values in data1
+#check for null values in sales
 
 ```
 
 ```{r}
-#check for null values in data2
+#check for null values in customers
 
 ```
 

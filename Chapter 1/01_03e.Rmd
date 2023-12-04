@@ -4,8 +4,8 @@ Exploring Customer Data
 ```{r}
 #run first
 library(xlsx)
-data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}
@@ -15,47 +15,47 @@ library("data.table")
 ```
 
 ```{r}
-#get data1 summary
-summary(data1)
+#get sales summary
+summary(sales)
 ```
 
 
 ```{r}
-#get data2 summary
-summary(data2)
+#get customers summary
+summary(customers)
 ```
 
 
 ```{r}
-#narrow data1 summary
-summary(data1[ , c('Quantity', 'Price', 'Discount', 'Order.Total')])
+#narrow sales summary
+summary(sales[ , c('Quantity', 'Price', 'Discount', 'Order.Total')])
 ```
 
 ```{r}
 #payment status value counts
-table(data1$Payment.Status)
+table(sales$Payment.Status)
 ```
 
 ```{r}
 #payment status proportions
-prop.table(table(data1$Payment.Status))
+prop.table(table(sales$Payment.Status))
 ```
 
 ```{r}
 #get payment plan by total number of orders
-table(data1$Payment.Plan)
-prop.table(table(data1$Payment.Plan))
+table(sales$Payment.Plan)
+prop.table(table(sales$Payment.Plan))
 ```
 
 ```{r}
-#check for null values in data1
-is.null(data1)
-sum(is.na(data1))
+#check for null values in sales
+is.null(sales)
+sum(is.na(sales))
 ```
 
 ```{r}
-#check for null values in data2
-is.null(data2)
-sum(is.na(data2))
+#check for null values in customers
+is.null(customers)
+sum(is.na(customers))
 ```
 

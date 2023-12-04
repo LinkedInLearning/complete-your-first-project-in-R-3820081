@@ -5,41 +5,41 @@ Exploring Customer Data
 #run first
 library(xlsx)
 library(dplyr)
-data1 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-data2 <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}
 #sort data by order total
-data1[order(data1$Order.Total, decreasing = TRUE), ]
+sales[order(sales$Order.Total, decreasing = TRUE), ]
 ```
 
 
 ```{r}
 #sort data by order quantity
-data1[order(data1$Quantity, decreasing = TRUE), ]
+sales[order(sales$Quantity, decreasing = TRUE), ]
 ```
 
 ```{r}
 #get top products by total number of orders
-data1 %>% count(ProdName, sort = TRUE)
+sales %>% count(ProdName, sort = TRUE)
 ```
 
 
 ```{r}
 #get top product categories by total number of orders
-data1 %>% count(ProdCategory, sort = TRUE)
+sales %>% count(ProdCategory, sort = TRUE)
 ```
 
 
 ```{r}
 #review product category proportions
-prop.table(table(data1$ProdCategory))
+prop.table(table(sales$ProdCategory))
 ```
 
 ```{r}
 #average sales and quantity by product category
-data1 %>% group_by(ProdCategory)  %>%
+sales %>% group_by(ProdCategory)  %>%
                     summarise(mean_sales = mean(Order.Total), 
                               mean_quantity = mean(Quantity), 
                               .groups = 'drop')
@@ -47,7 +47,7 @@ data1 %>% group_by(ProdCategory)  %>%
 
 ```{r}
 #total sales and quantity by product category
-data1 %>% group_by(ProdCategory)  %>%
+sales %>% group_by(ProdCategory)  %>%
                     summarise(total_sales = sum(Order.Total), 
                               total_quantity = sum(Quantity), 
                               .groups = 'drop')
@@ -55,16 +55,16 @@ data1 %>% group_by(ProdCategory)  %>%
 
 ```{r}
 #review product categories sold by sales regions
-table(data1$ProdCategory, data1$Sales.Region)
+table(sales$ProdCategory, sales$Sales.Region)
 ```
 
 ```{r}
 #review product categories sold by order type
-table(data1$Employee.Job.Title, data1$OrderType)
+table(sales$Employee.Job.Title, sales$OrderType)
 ```
 
 ```{r}
 #review product categories sold by order type
-table(data1$Employee.Job.Title, data1$CustomerType)
+table(sales$Employee.Job.Title, sales$CustomerType)
 ```
 
