@@ -47,16 +47,14 @@ prop.table(table(sales$Sales.Region))
 #average sales and quantity by employee job titles
 sales %>% group_by(Employee.Job.Title)  %>%
                     summarise(mean_sales = mean(Order.Total), 
-                              mean_quantity = mean(Quantity), 
-                              .groups = 'drop')
+                              mean_quantity = mean(Quantity))
 ```
 
 ```{r}
 #total sales and quantity by employee job titles
 sales %>% group_by(Employee.Job.Title)  %>%
                     summarise(total_sales = sum(Order.Total), 
-                              total_quantity = sum(Quantity), 
-                              .groups = 'drop')
+                              total_quantity = sum(Quantity))
 ```
 
 ```{r}

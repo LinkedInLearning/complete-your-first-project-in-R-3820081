@@ -41,16 +41,14 @@ prop.table(table(sales$ProdCategory))
 #average sales and quantity by product category
 sales %>% group_by(ProdCategory)  %>%
                     summarise(mean_sales = mean(Order.Total), 
-                              mean_quantity = mean(Quantity), 
-                              .groups = 'drop')
+                              mean_quantity = mean(Quantity))
 ```
 
 ```{r}
 #total sales and quantity by product category
 sales %>% group_by(ProdCategory)  %>%
                     summarise(total_sales = sum(Order.Total), 
-                              total_quantity = sum(Quantity), 
-                              .groups = 'drop')
+                              total_quantity = sum(Quantity))
 ```
 
 ```{r}

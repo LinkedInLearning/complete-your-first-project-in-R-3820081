@@ -21,8 +21,7 @@ prop.table(table(sales$CustomerType))
 #average sales and quantity by customer type
 sales %>% group_by(CustomerType)  %>%
                     summarise(mean_sales = mean(Order.Total), 
-                              mean_quantity = mean(Quantity), 
-                              .groups = 'drop')
+                              mean_quantity = mean(Quantity))
 ```
 
 
@@ -30,8 +29,7 @@ sales %>% group_by(CustomerType)  %>%
 #total sales and quantity by customer type
 sales %>% group_by(CustomerType)  %>%
                     summarise(total_sales = sum(Order.Total), 
-                              total_quantity = sum(Quantity), 
-                              .groups = 'drop')
+                              total_quantity = sum(Quantity))
 ```
 
 ```{r}
