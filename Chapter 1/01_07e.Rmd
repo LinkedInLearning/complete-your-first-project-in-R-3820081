@@ -58,11 +58,11 @@ table(sales$ProdCategory, sales$Sales.Region)
 
 ```{r}
 #review product categories sold by order type
-table(sales$Employee.Job.Title, sales$OrderType)
+table(sales$ProdCategory, sales$OrderType)
 ```
 
 ```{r}
-#review product categories sold by order type
-table(sales$Employee.Job.Title, sales$CustomerType)
+#review product categories sold by customer type
+table(sales$ProdCategory, sales$CustomerType)
 ```
 

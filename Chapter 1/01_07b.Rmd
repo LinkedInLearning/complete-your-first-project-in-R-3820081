@@ -58,7 +58,7 @@ customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project
 ```
 
 ```{r}
-#review product categories sold by order type
+#review product categories sold by customer type
 
 ```
 
