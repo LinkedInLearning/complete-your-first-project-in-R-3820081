@@ -1,0 +1,38 @@
+Complete Your First Project in R
+Classification Analysis
+
+```{r}
+#run first
+library(xlsx)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+summary(sales)
+```
+
+```{r}
+#get order month
+
+```
+
+
+```{r}
+#get order year
+
+```
+
+
+```{r}
+#factor payment status
+
+```
+
+
+```{r}
+#get subset of sales data
+
+```
+
+```{r}
+#split train and test data
+
+```
+

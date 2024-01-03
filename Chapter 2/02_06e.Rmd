@@ -1,0 +1,120 @@
+Complete Your First Project in R
+Classification Analysis
+
+```{r}
+#run first
+library(xlsx)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+sales$Payment.Status <- factor(sales$Payment.Status)
+```
+
+```{r}
+#run first
+library(tidymodels)
+library(rpart)
+library(rpart.plot)
+library(ranger)
+library(e1071)
+```
+
+```{r}
+#run first
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth
+                     ,OrderYear , OrderType , CustomerType , ProdCategory
+                     , Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+set.seed(42)
+bound <- floor((nrow(sales_subset)/4)*3)         #define % of training and test set
+
+df <- sales_subset[sample(nrow(sales_subset)), ]           #sample rows 
+train <- df[1:bound, ]              #get training set
+test <- df[(bound+1):nrow(df), ]    #get test set
+
+df_recipe <- recipe(Payment.Status~ ., data = df) %>%
+  step_normalize(all_numeric())
+```
+
+
+```{r}
+#run first
+tree <- decision_tree() %>%
+   set_engine("rpart") %>%
+   set_mode("classification")
+
+tree_wf <- workflow() %>%
+   add_recipe(df_recipe) %>%
+   add_model(tree) %>%
+   fit(train)
+
+predResults <- data.frame(predict(tree_wf, test))
+colnames(predResults) <- c('test_pred_tree')
+test <- cbind(test,predResults) 
+```
+
+```{r}
+#run first
+rf <- rand_forest() %>%
+   set_engine("ranger", importance = "impurity") %>%
+   set_mode("classification")
+
+tree_rand_forest <- workflow() %>%
+   add_recipe(df_recipe) %>%
+   add_model(rf) %>%
+   fit(train)
+
+predResults <- data.frame(predict(tree_rand_forest, test))
+colnames(predResults) <- c('test_pred_rf')
+test <- cbind(test,predResults)
+```
+
+```{r}
+#run first
+classifier <- svm(formula = Payment.Status ~ ., 
+                 data = train, 
+                 type = 'C-classification', 
+                 kernel = 'linear') 
+
+test$test_pred_svm <- predict(classifier,test)
+```
+
+
+```{r}
+#review test data
+test
+```
+
+
+```{r}
+#create confusion matrix
+conf_mat(test, truth = Payment.Status, estimate = test_pred_tree)
+```
+
+```{r}
+#get summary metrics
+dt_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+dt_metrics(test, truth = Payment.Status, estimate = test_pred_tree)
+```
+
+```{r}
+#create confusion matrix
+conf_mat(test, truth = Payment.Status, estimate = test_pred_rf)
+```
+
+```{r}
+#get summary metrics
+rf_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+rf_metrics(test, truth = Payment.Status, estimate = test_pred_rf)
+```
+
+```{r}
+#create confusion matrix
+conf_mat(test, truth = Payment.Status, estimate = test_pred_svm)
+```
+
+```{r}
+#get summary metrics
+svm_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+svm_metrics(test, truth = Payment.Status, estimate = test_pred_svm)
+```

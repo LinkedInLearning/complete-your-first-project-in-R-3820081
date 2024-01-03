@@ -1,0 +1,86 @@
+Complete Your First Project in R
+Classification Analysis
+
+```{r}
+#run first
+library(xlsx)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+sales$Payment.Status <- factor(sales$Payment.Status)
+summary(sales)
+```
+
+```{r}
+#run first
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth
+                     ,OrderYear , OrderType , CustomerType , ProdCategory
+                     , Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+set.seed(42)
+bound <- floor((nrow(sales_subset)/4)*3)         #define % of training and test set
+
+df <- sales_subset[sample(nrow(sales_subset)), ]           #sample rows 
+train <- df[1:bound, ]              #get training set
+test <- df[(bound+1):nrow(df), ]    #get test set
+summary(train)
+summary(test)
+```
+
+```{r}
+#install packages if needed
+install.packages("tidymodels")
+install.packages("rpart")
+```
+
+
+```{r}
+#load packages
+library(tidymodels)
+library(rpart)
+library(rpart.plot) 
+```
+
+
+```{r}
+#create decision tree model
+tree <- decision_tree() %>%
+   set_engine("rpart") %>%
+   set_mode("classification")
+```
+
+```{r}
+#create recipe
+df_recipe <- recipe(Payment.Status~ ., data = df) %>%
+  step_normalize(all_numeric())
+```
+
+```{r}
+#create decision tree workflow
+ tree_wf <- workflow() %>%
+   add_recipe(df_recipe) %>%
+   add_model(tree) %>%
+   fit(train)
+```
+
+```{r}
+#get summary of tree_wf
+summary(tree_wf)
+```
+```{r}
+#predict on model
+predResults <- data.frame(predict(tree_wf, test))
+colnames(predResults) <- c('test_pred_tree')
+test <- cbind(test,predResults) 
+test
+```
+
+```{r, fig.width=11, fig.height=7}
+#plot decision tree
+fit <- rpart(Payment.Status~., data = train, method = 'class')
+rpart.plot(fit, tweak=1.5)
+```
+
+
+
+

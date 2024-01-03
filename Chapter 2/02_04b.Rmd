@@ -1,0 +1,66 @@
+Complete Your First Project in R
+Classification Analysis
+
+```{r}
+#run first
+library(xlsx)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+sales$Payment.Status <- factor(sales$Payment.Status)
+summary(sales)
+```
+
+```{r}
+#run first
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth
+                     ,OrderYear , OrderType , CustomerType , ProdCategory
+                     , Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+set.seed(42)
+bound <- floor((nrow(sales_subset)/4)*3)         #define % of training and test set
+
+df <- sales_subset[sample(nrow(sales_subset)), ]           #sample rows 
+train <- df[1:bound, ]              #get training set
+test <- df[(bound+1):nrow(df), ]    #get test set
+
+df_recipe <- recipe(Payment.Status~ ., data = df) %>%
+  step_normalize(all_numeric())
+
+summary(train)
+summary(test)
+```
+
+```{r}
+#install package if needed
+
+```
+
+
+```{r}
+#load packages
+
+```
+
+
+```{r}
+#create random forest model
+
+```
+
+
+```{r}
+#create random forest workflow
+
+```
+
+```{r}
+#get summary of tree_rand_forest
+
+```
+
+```{r}
+#predict on model
+
+```
+

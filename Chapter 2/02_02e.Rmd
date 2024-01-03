@@ -1,0 +1,50 @@
+Complete Your First Project in R
+Classification Analysis
+
+```{r}
+#run first
+library(xlsx)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+summary(sales)
+```
+
+```{r}
+#get order month
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+summary(sales) 
+```
+
+
+```{r}
+#get order year
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+summary(sales)
+```
+
+
+```{r}
+#factor payment status
+sales$Payment.Status <- factor(sales$Payment.Status)
+summary(sales)
+```
+
+
+```{r}
+#get subset of sales data
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth
+                     ,OrderYear , OrderType , CustomerType , ProdCategory
+                     , Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+```
+
+```{r}
+#split train and test data
+set.seed(42)
+bound <- floor((nrow(sales_subset)/4)*3)        
+
+df <- sales_subset[sample(nrow(sales_subset)), ]           
+train <- df[1:bound, ]              
+test <- df[(bound+1):nrow(df), ]    
+summary(train)
+summary(test)
+```
+

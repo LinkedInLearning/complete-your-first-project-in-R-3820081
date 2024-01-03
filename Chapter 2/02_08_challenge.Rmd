@@ -1,0 +1,97 @@
+Complete Your First Project in R
+Classification Analysis
+
+```{r}
+#run first
+library(xlsx)
+library(tidymodels)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+sales$Payment.Status <- factor(sales$Payment.Status)
+summary(sales)
+```
+
+```{r}
+#run first
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth
+                     ,OrderYear , OrderType , CustomerType , ProdCategory
+                     , Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+set.seed(42)
+bound <- floor((nrow(sales_subset)/4)*3)         #define % of training and test set
+
+df <- sales_subset[sample(nrow(sales_subset)), ]           #sample rows 
+train <- df[1:bound, ]              #get training set
+test <- df[(bound+1):nrow(df), ]    #get test set
+summary(train)
+summary(test)
+```
+
+```{r}
+#run first
+library(e1071)
+
+classifier <- svm(formula = Payment.Status ~ ., 
+                 data = train, 
+                 type = 'C-classification', 
+                 kernel = 'sigmoid') 
+
+summary(classifier)
+```
+
+
+```{r}
+#run first
+test$test_pred_svm <- predict(classifier,test)
+test 
+```
+
+```{r}
+#run first
+conf_mat(test, truth = Payment.Status, estimate = test_pred_svm)
+```
+
+```{r}
+#run first
+custom_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+custom_metrics(test, truth = Payment.Status, estimate = test_pred_svm)
+```
+
+```{r}
+#EDIT THIS BLOCK OF CODE
+#tune svm model
+obj <- tune.svm(Payment.Status~., data = train)
+summary(obj)
+```
+
+
+```{r}
+#EDIT THIS BLOCK OF CODE
+#run tuned svm model
+new_classifier <- svm(formula = Payment.Status ~ ., 
+                 data = train) 
+```
+
+```{r}
+#get classifier summary
+summary(new_classifier)
+```
+
+```{r}
+#predict on new svm model
+test$test_pred_svm_new <- predict(new_classifier,test)
+test 
+```
+
+```{r}
+#create confusion matrix
+conf_mat(test, truth = Payment.Status, estimate = test_pred_svm_new)
+```
+
+```{r}
+#get summary metrics
+svm_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+svm_metrics(test, truth = Payment.Status, estimate = test_pred_svm_new)
+```
+
