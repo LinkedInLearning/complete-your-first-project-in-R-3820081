@@ -54,7 +54,7 @@ conf_mat(test, truth = Payment.Status, estimate = test_pred_svm)
 
 ```{r}
 #run first
-custom_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+custom_metrics <- metric_set(accuracy, sens, spec, precision, f_meas, kap)
 custom_metrics(test, truth = Payment.Status, estimate = test_pred_svm)
 ```
 
@@ -91,7 +91,7 @@ conf_mat(test, truth = Payment.Status, estimate = test_pred_svm_new)
 
 ```{r}
 #get summary metrics
-svm_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+svm_metrics <- metric_set(accuracy, sens, spec, precision, f_meas, kap)
 svm_metrics(test, truth = Payment.Status, estimate = test_pred_svm_new)
 ```
 

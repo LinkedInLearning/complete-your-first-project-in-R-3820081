@@ -93,7 +93,7 @@ conf_mat(test, truth = Payment.Status, estimate = test_pred_tree)
 
 ```{r}
 #get summary metrics
-dt_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+dt_metrics <- metric_set(accuracy, sens, spec, precision, f_meas, kap)
 dt_metrics(test, truth = Payment.Status, estimate = test_pred_tree)
 ```
 
@@ -104,7 +104,7 @@ conf_mat(test, truth = Payment.Status, estimate = test_pred_rf)
 
 ```{r}
 #get summary metrics
-rf_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+rf_metrics <- metric_set(accuracy, sens, spec, precision, f_meas, kap)
 rf_metrics(test, truth = Payment.Status, estimate = test_pred_rf)
 ```
 
@@ -115,6 +115,6 @@ conf_mat(test, truth = Payment.Status, estimate = test_pred_svm)
 
 ```{r}
 #get summary metrics
-svm_metrics <- metric_set(accuracy, sens, spec, precision, recall, f_meas, kap)
+svm_metrics <- metric_set(accuracy, sens, spec, precision, f_meas, kap)
 svm_metrics(test, truth = Payment.Status, estimate = test_pred_svm)
 ```
