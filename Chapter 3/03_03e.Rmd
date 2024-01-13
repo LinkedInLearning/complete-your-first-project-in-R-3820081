@@ -1,0 +1,83 @@
+Complete Your First Project in R
+Cluster Analysis
+
+```{r}
+#run first
+library(xlsx)
+library(lattice)
+library(caret)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+summary(sales)
+```
+
+
+```{r}
+#run first
+set.seed(42)
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth,
+                     OrderYear , OrderType , CustomerType , CustState, ProdCategory,
+                     Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+sales_subset <- na.omit(sales_subset)
+dmy <- dummyVars(" ~ .", data = sales_subset)
+trsf <- data.frame(predict(dmy, newdata = sales_subset))
+trsf.pre <- preProcess(trsf, method="range")
+scaled_data <- predict(trsf.pre, trsf)
+```
+
+
+```{r}
+#install packages if needed
+#install.packages("ggplot2")
+#install.packages("cluster")
+#install.packages("factoextra")
+```
+
+
+```{r}
+#install packages
+library(ggplot2)
+library(cluster)
+library(factoextra)
+```
+
+
+```{r}
+#Determine number of clusters based on wss
+set.seed(42)
+fviz_nbclust(scaled_data, kmeans, method = "wss")
+```
+
+
+```{r}
+#Determine number of clusters based on average silhouette
+fviz_nbclust(scaled_data, kmeans, method = "silhouette")
+```
+
+
+```{r}
+#run k-means algorithm
+km <- kmeans(scaled_data, centers = 2, nstart = 25)
+km
+```
+
+
+```{r}
+#get total within-cluster sum of squares
+km$totss
+```
+
+
+```{r}
+#get between-cluster sum of squares
+km$betweenss
+```
+
+
+```{r}
+#get silhouette score
+fviz_silhouette(silhouette(km$cluster, dist(scaled_data)))
+```
+

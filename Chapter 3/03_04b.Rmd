@@ -1,0 +1,66 @@
+Complete Your First Project in R
+Cluster Analysis
+
+```{r}
+#run first
+library(xlsx)
+library(ggplot2)
+library(lattice)
+library(caret)
+library(cluster)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+summary(sales)
+```
+
+
+
+```{r}
+#run first
+set.seed(42)
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth,
+                     OrderYear , OrderType , CustomerType , CustState, ProdCategory,
+                     Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+sales_subset <- na.omit(sales_subset)
+dmy <- dummyVars(" ~ .", data = sales_subset)
+trsf <- data.frame(predict(dmy, newdata = sales_subset))
+trsf.pre <- preProcess(trsf, method="range")
+scaled_data <- predict(trsf.pre, trsf)
+```
+
+
+```{r}
+#Create distance matrix
+
+```
+
+```{r}
+#Fit hierarchial clustering model
+
+```
+
+```{r fig.width=12, fig.height=10}
+#Plot dendrogram
+
+```
+
+
+```{r}
+# Cut tree into clusters
+
+```
+
+
+```{r fig.width=12, fig.height=10}
+#Plot dendrogram
+
+```
+
+
+```{r fig.width=10, fig.height=8}
+#Determine silhouette score
+
+```
+

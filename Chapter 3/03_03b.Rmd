@@ -1,0 +1,79 @@
+Complete Your First Project in R
+Cluster Analysis
+
+```{r}
+#run first
+library(xlsx)
+library(lattice)
+library(caret)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+summary(sales)
+```
+
+
+```{r}
+#run first
+set.seed(42)
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth,
+                     OrderYear , OrderType , CustomerType , CustState, ProdCategory,
+                     Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+
+sales_subset <- na.omit(sales_subset)
+dmy <- dummyVars(" ~ .", data = sales_subset)
+trsf <- data.frame(predict(dmy, newdata = sales_subset))
+trsf.pre <- preProcess(trsf, method="range")
+scaled_data <- predict(trsf.pre, trsf)
+```
+
+
+```{r}
+#install packages if needed
+#install.packages("ggplot2")
+#install.packages("cluster")
+#install.packages("factoextra")
+```
+
+
+```{r}
+#install packages
+
+```
+
+
+```{r}
+#Determine number of clusters based on wss
+
+```
+
+
+```{r}
+#Determine number of clusters based on average silhouette
+
+```
+
+
+```{r}
+#run k-means algorithm
+
+```
+
+
+```{r}
+#get total within-cluster sum of squares
+
+```
+
+
+```{r}
+#get between-cluster sum of squares
+
+```
+
+
+```{r}
+#get silhouette score
+
+```
+

@@ -1,0 +1,111 @@
+Complete Your First Project in R
+Cluster Analysis
+
+```{r}
+#run first
+library(xlsx)
+library(lattice)
+library(caret)
+library(dplyr)
+library(ggplot2)
+library(cluster)
+library(factoextra)
+```
+
+
+```{r}
+#run first
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+summary(sales)
+```
+
+
+```{r}
+##EDIT THIS BLOCK OF CODE
+#Filter data to late payment status only
+sales <- 
+summary(sales)
+```
+
+
+
+```{r}
+#run after edited block of code
+#removes Payment.Plan and Payment.Status columns
+set.seed(42)
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth,
+                     OrderYear , OrderType , CustomerType , CustState, ProdCategory,
+                     Quantity , Price , Discount , Order.Total))
+ 
+sales_subset <- na.omit(sales_subset)
+dmy <- dummyVars(" ~ .", data = sales_subset)
+trsf <- data.frame(predict(dmy, newdata = sales_subset))
+trsf.pre <- preProcess(trsf, method="range")
+scaled_data <- predict(trsf.pre, trsf)
+```
+
+
+```{r}
+#Determine number of clusters based on wss
+set.seed(42)
+fviz_nbclust(scaled_data, kmeans, method = "wss")
+```
+
+
+```{r}
+#Determine number of clusters based on average silhouette
+fviz_nbclust(scaled_data, kmeans, method = "silhouette")
+```
+
+
+```{r}
+##EDIT THIS BLOCK OF CODE
+#run k-means algorithm for best # of clusters
+km <- 
+km
+```
+
+
+```{r}
+#get silhouette score
+sil <- silhouette(km$cluster, dist(scaled_data))
+
+fviz_silhouette(sil)
+```
+
+
+```{r}
+#Add cluster column to dataset
+final_data <- cbind(sales, cluster = km$cluster)
+final_data
+```
+
+
+```{r}
+#summarize data
+final_data %>% group_by(cluster)  %>%
+                    summarise(across(everything(), list(mean)))
+```
+
+
+```{r}
+##EDIT THIS BLOCK OF CODE
+#evaluate Sales.Region by cluster
+
+```
+
+```{r}
+#add column to scaled dataset
+final_scaled_data <- cbind(scaled_data, cluster = km$cluster)
+final_scaled_data <- as.data.frame(final_scaled_data)
+final_scaled_data
+```
+
+
+```{r}
+#summarize data all numerically
+final_scaled_data %>% group_by(cluster)  %>%
+                    summarise(across(everything(), list(mean)))
+```

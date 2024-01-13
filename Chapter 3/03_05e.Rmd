@@ -1,0 +1,93 @@
+Complete Your First Project in R
+Cluster Analysis
+
+```{r}
+#run first
+library(xlsx)
+library(ggplot2)
+library(lattice)
+library(caret)
+library(factoextra)
+library(cluster)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+sales$OrderMonth <- format(sales$OrderDate,"%B")
+sales$OrderYear <- format(sales$OrderDate,"%Y")
+summary(sales)
+```
+
+
+```{r}
+#run first, removed product name
+set.seed(42)
+sales_subset <- subset(sales, select = c(Employee.Job.Title , Sales.Region , OrderMonth,
+                     OrderYear , OrderType , CustomerType , CustState, ProdCategory,
+                     Quantity , Price , Discount , Order.Total , Payment.Plan, Payment.Status))
+ 
+sales_subset <- na.omit(sales_subset)
+dmy <- dummyVars(" ~ .", data = sales_subset)
+trsf <- data.frame(predict(dmy, newdata = sales_subset))
+trsf.pre <- preProcess(trsf, method="range")
+scaled_data <- predict(trsf.pre, trsf)
+```
+
+
+```{r}
+#install packages if needed
+#install.packages("ClusterR")
+```
+
+```{r}
+#import packages
+library(ClusterR)
+```
+
+```{r}
+#Find optimal number of clusters based on BIC
+opt_gmm <- Optimal_Clusters_GMM(scaled_data, max_clusters = 10, criterion = "BIC", 
+                               dist_mode = "eucl_dist",  plot_data = T)
+```
+
+
+```{r}
+#Find optimal number of clusters based on AIC
+opt_gmm2 <- Optimal_Clusters_GMM(scaled_data, max_clusters = 10, criterion = "AIC", 
+                               dist_mode = "eucl_dist",  plot_data = T)
+```
+
+```{r}
+#run GMM model for selected number of clusters
+gmm <- GMM(scaled_data, 3, dist_mode = "eucl_dist")          
+gmm
+```
+
+
+```{r}
+# predict clusters
+gmm_cluster <- predict(gmm, newdata = scaled_data)
+gmm_cluster
+```
+```{r}
+#Transform the gmm_cluster variable into a list
+dt <- data.table::as.data.table(gmm_cluster, .keep.rownames = "word")
+typeof(dt)
+```
+
+
+```{r}
+#Add cluster column to final dataset
+final_data <- cbind(scaled_data, cluster = dt)
+final_data
+```
+
+```{r}
+#Look at cluster sizes
+table(final_data$gmm_cluster)
+```
+
+
+
+```{r}
+#Determine silhouette score
+fviz_silhouette(silhouette(final_data$gmm_cluster, dist(scaled_data)))
+```
+
