@@ -6,7 +6,6 @@ Exploring Customer Data
 library(xlsx)
 library(dplyr)
 sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
-customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
 ```
 
 ```{r}
@@ -37,20 +36,6 @@ sales %>% group_by(CustomerType)  %>%
 sales %>% count(CustState, sort = TRUE)
 ```
 
-```{r}
-#get top customer states by total number of customers
-customers %>% count(CustState, sort = TRUE)
-```
-
-```{r}
-#get top customer cities by total number of customers
-customers %>% count(CustCity, sort = TRUE)
-```
-
-```{r}
-#get top customer states by total number of customers
-customers %>% count(CustZip, sort = TRUE)
-```
 
 ```{r}
 #review product categories sold by customer type

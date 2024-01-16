@@ -18,10 +18,3 @@ sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Cou
 sales
 ```
 
-
-```{r}
-#load Red30 Tech Customer data
-customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
-customers
-```
-

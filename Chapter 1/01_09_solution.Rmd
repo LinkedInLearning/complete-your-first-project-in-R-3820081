@@ -5,27 +5,27 @@ Exploring Customer Data
 #run first
 library(xlsx)
 library(dplyr)
-customers <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Customers.xlsx",1)
+sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
 ```
 
 ```{r}
 #get count of years by number of customers 
-customers %>% count(DateCustAdded, sort = TRUE)
+sales %>% count(DateCustAdded, sort = TRUE)
 ```
 
 ```{r}
 #review customer states when customers were added
-table(customers$CustState, customers$DateCustAdded)
+table(sales$CustState, sales$DateCustAdded)
 ```
 
 ```{r}
 #sort data by date customer added, newest customer
-customers[order(customers$DateCustAdded, decreasing = TRUE), ]
+sales[order(sales$DateCustAdded, decreasing = TRUE), ]
 ```
 
 ```{r}
 #sort data by date customer added, oldest customers
-customers[order(customers$DateCustAdded, decreasing = FALSE), ]
+sales[order(sales$DateCustAdded, decreasing = FALSE), ]
 ```
 
 

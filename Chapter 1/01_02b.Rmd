@@ -18,8 +18,3 @@ Exploring Customer Data
 ```
 
 
-```{r}
-#load Red30 Tech Customer data
-
-```
-
