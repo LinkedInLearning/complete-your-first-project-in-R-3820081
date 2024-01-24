@@ -6,8 +6,21 @@ Exploring Customer Data
 
 ```
 
+
 ```{r}
-#import xlsx library
+#install openxlsx package
+
+```
+
+
+```{r}
+#install openxlsx package
+
+```
+
+
+```{r}
+#import openxlsx package
 
 ```
 
@@ -16,5 +29,3 @@ Exploring Customer Data
 #load Red30 Tech Sales data
 
 ```
-
-

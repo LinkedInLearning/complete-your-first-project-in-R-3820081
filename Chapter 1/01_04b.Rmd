@@ -3,12 +3,19 @@ Exploring Customer Data
 
 ```{r}
 #run first
-library(xlsx)
-sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+library(openxlsx)
+sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 ```
+
 
 ```{r}
 #install dplyr package
+
+```
+
+
+```{r}
+#import dplyr package
 
 ```
 
