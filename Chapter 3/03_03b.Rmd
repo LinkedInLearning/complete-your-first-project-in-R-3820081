@@ -3,10 +3,10 @@ Cluster Analysis
 
 ```{r}
 #run first
-library(xlsx)
 library(lattice)
 library(caret)
-sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+library(openxlsx)
+sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 sales$OrderMonth <- format(sales$OrderDate,"%B")
 sales$OrderYear <- format(sales$OrderDate,"%Y")
 summary(sales)
@@ -32,7 +32,7 @@ scaled_data <- predict(trsf.pre, trsf)
 #install packages if needed
 #install.packages("ggplot2")
 #install.packages("cluster")
-#install.packages("factoextra")
+install.packages("factoextra")
 ```
 
 

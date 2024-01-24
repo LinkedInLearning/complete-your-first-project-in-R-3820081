@@ -3,8 +3,9 @@ Cluster Analysis
 
 ```{r}
 #run first
-library(xlsx)
-sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+library(openxlsx)
+library(ggplot2)
+sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 sales$OrderMonth <- format(sales$OrderDate,"%B")
 sales$OrderYear <- format(sales$OrderDate,"%Y")
 summary(sales)
