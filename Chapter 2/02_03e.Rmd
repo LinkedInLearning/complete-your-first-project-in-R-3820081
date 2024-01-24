@@ -3,8 +3,8 @@ Classification Analysis
 
 ```{r}
 #run first
-library(xlsx)
-sales <- read.xlsx("/Users/megansilvey/Documents/LinkedIn Learning/R Project Course/Red30 Tech Sales.xlsx",1)
+library(openxlsx)
+sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 sales$OrderMonth <- format(sales$OrderDate,"%B")
 sales$OrderYear <- format(sales$OrderDate,"%Y")
 sales$Payment.Status <- factor(sales$Payment.Status)
@@ -31,6 +31,7 @@ summary(test)
 #install packages if needed
 install.packages("tidymodels")
 install.packages("rpart")
+install.packages("rpart.plot")
 ```
 
 
