@@ -3,6 +3,7 @@ Classification Analysis
 
 ```{r}
 #run first
+library(tidymodels)
 library(openxlsx)
 sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 sales$OrderMonth <- format(sales$OrderDate,"%B")
@@ -28,61 +29,62 @@ summary(test)
 ```
 
 ```{r}
-#install packages if needed
-install.packages("tidymodels")
-install.packages("rpart")
-install.packages("rpart.plot")
+#run first
+library(e1071)
+
+classifier <- svm(formula = Payment.Status ~ ., 
+                 data = train, 
+                 type = 'C-classification', 
+                 kernel = 'linear') 
+
+summary(classifier)
 ```
 
 
 ```{r}
-#load packages
-library(tidymodels)
-library(rpart)
-library(rpart.plot) 
+#run first
+test$test_pred_svm <- predict(classifier,test)
+test 
+```
+
+```{r}
+#tune svm model
+
+
+
+
+
+
 ```
 
 
 ```{r}
-#create decision tree model
-tree <- decision_tree() %>%
-   set_engine("rpart") %>%
-   set_mode("classification")
+#run tuned svm model
+
+
+
+
 ```
 
 ```{r}
-#create recipe
-df_recipe <- recipe(Payment.Status~ ., data = df) %>%
-  step_normalize(all_numeric())
+#get classifier summary
+
 ```
 
 ```{r}
-#create decision tree workflow
- tree_wf <- workflow() %>%
-   add_recipe(df_recipe) %>%
-   add_model(tree) %>%
-   fit(train)
+#predict on new svm model
+test$test_pred_svm <- predict(new_classifier,test)
+test 
 ```
 
 ```{r}
-#get summary of tree_wf
-summary(tree_wf)
+#create confusion matrix
+conf_mat(test, truth = Payment.Status, estimate = test_pred_svm)
 ```
 
 ```{r}
-#predict on model
-predResults <- data.frame(predict(tree_wf, test))
-colnames(predResults) <- c('test_pred_tree')
-test <- cbind(test,predResults) 
-test
+#get summary metrics
+svm_metrics <- metric_set(accuracy, sens, spec, precision, f_meas, kap)
+svm_metrics(test, truth = Payment.Status, estimate = test_pred_svm)
 ```
-
-```{r, fig.width=11, fig.height=7}
-#plot decision tree
-fit <- rpart(Payment.Status~., data = train, method = 'class')
-rpart.plot(fit, tweak=1.5)
-```
-
-
-
 
