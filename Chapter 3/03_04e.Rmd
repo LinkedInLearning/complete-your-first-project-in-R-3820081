@@ -37,7 +37,7 @@ distance_mat <- dist(scaled_data, method = 'euclidean')
 ```
 
 ```{r}
-#Fit hierarchial clustering model
+#Fit hierarchical clustering model
 Hierar_cl <- hclust(distance_mat, method = "average")
 Hierar_cl
 ```
@@ -51,7 +51,7 @@ abline(h=4, col = "red")
 
 ```{r}
 # Cut tree into clusters
-sub_grp <- cutree(Hierar_cl, k = 3)
+sub_grp <- cutree(Hierar_cl, k = 2)
 table(sub_grp)
 ```
 
@@ -59,12 +59,12 @@ table(sub_grp)
 ```{r fig.width=12, fig.height=10}
 #Plot dendrogram
 plot(Hierar_cl)
-rect.hclust(Hierar_cl , k = 3)
+rect.hclust(Hierar_cl , k = 2)
 ```
 
 
-```{r fig.width=10, fig.height=8}
+```{r fig.width=10, fig.height=7}
 #Determine silhouette score
-plot(silhouette(cutree(Hierar_cl, k=3) ,distance_mat, border=NA)) 
+plot(silhouette(cutree(Hierar_cl, k=2) ,distance_mat, border=NA)) 
 ```
 

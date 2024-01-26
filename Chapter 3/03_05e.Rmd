@@ -66,6 +66,7 @@ gmm
 gmm_cluster <- predict(gmm, newdata = scaled_data)
 gmm_cluster
 ```
+
 ```{r}
 #Transform the gmm_cluster variable into a list
 dt <- data.table::as.data.table(gmm_cluster, .keep.rownames = "word")

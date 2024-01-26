@@ -13,8 +13,8 @@ summary(sales)
 
 ```{r}
 #install packages if needed
-#install.packages("lattice")
-#install.packages("caret")
+install.packages("lattice")
+install.packages("caret")
 ```
 
 

@@ -30,14 +30,14 @@ scaled_data <- predict(trsf.pre, trsf)
 
 ```{r}
 #install packages if needed
-#install.packages("ggplot2")
-#install.packages("cluster")
+install.packages("ggplot2")
+install.packages("cluster")
 install.packages("factoextra")
 ```
 
 
 ```{r}
-#install packages
+#import packages
 
 ```
 
