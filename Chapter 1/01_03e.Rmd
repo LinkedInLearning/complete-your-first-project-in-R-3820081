@@ -9,7 +9,11 @@ sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 
 ```{r}
 #install data table package
-install.packages("data.table", dependencies=TRUE)
+install.packages("data.table")
+```
+
+```{r}
+#import data.table package
 library("data.table")
 ```
 
@@ -17,7 +21,6 @@ library("data.table")
 #get sales summary
 summary(sales)
 ```
-
 
 ```{r}
 #narrow sales summary

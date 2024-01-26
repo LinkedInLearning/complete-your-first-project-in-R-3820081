@@ -4,6 +4,7 @@ Exploring Customer Data
 ```{r}
 #run first
 library(openxlsx)
+library(data.table)
 sales <- read.xlsx("Red30 Tech Sales.xlsx",1,detectDates = TRUE)
 ```
 
